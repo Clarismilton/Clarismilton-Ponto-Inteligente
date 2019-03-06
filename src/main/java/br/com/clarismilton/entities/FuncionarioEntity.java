@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,6 +20,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import br.com.clarismilton.enums.PerfilEnum;
 
@@ -41,12 +43,12 @@ public class FuncionarioEntity implements Serializable {
 	private Date dataAtualizacao;
 	private EmpresaEntity empresa;
 	private List<LancamentoEntity> lancamentos;
-	
+
 	public FuncionarioEntity() {
 	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+   	@GeneratedValue(strategy=GenerationType.AUTO)
 	public Long getId() {
 		return id;
 	}
@@ -63,6 +65,7 @@ public class FuncionarioEntity implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	@Column(name = "email", nullable = false)
 	public String getEmail() {
 		return email;
@@ -71,16 +74,7 @@ public class FuncionarioEntity implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	@Column(name = "senha", nullable = false)
-	public String getSenha() {
-		return senha;
-	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-	
 	@Column(name = "cpf", nullable = false)
 	public String getCpf() {
 		return cpf;
@@ -89,10 +83,15 @@ public class FuncionarioEntity implements Serializable {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	
+
 	@Column(name = "valor_hora", nullable = true)
 	public BigDecimal getValorHora() {
 		return valorHora;
+	}
+	
+	@Transient
+	public Optional<BigDecimal> getValorHoraOpt() {
+		return Optional.ofNullable(valorHora);
 	}
 
 	public void setValorHora(BigDecimal valorHora) {
@@ -103,6 +102,11 @@ public class FuncionarioEntity implements Serializable {
 	public Float getQtdHorasTrabalhoDia() {
 		return qtdHorasTrabalhoDia;
 	}
+	
+	@Transient
+	public Optional<Float> getQtdHorasTrabalhoDiaOpt() {
+		return Optional.ofNullable(qtdHorasTrabalhoDia);
+	}
 
 	public void setQtdHorasTrabalhoDia(Float qtdHorasTrabalhoDia) {
 		this.qtdHorasTrabalhoDia = qtdHorasTrabalhoDia;
@@ -111,6 +115,11 @@ public class FuncionarioEntity implements Serializable {
 	@Column(name = "qtd_horas_almoco", nullable = true)
 	public Float getQtdHorasAlmoco() {
 		return qtdHorasAlmoco;
+	}
+	
+	@Transient
+	public Optional<Float> getQtdHorasAlmocoOpt() {
+		return Optional.ofNullable(qtdHorasAlmoco);
 	}
 
 	public void setQtdHorasAlmoco(Float qtdHorasAlmoco) {
@@ -145,6 +154,15 @@ public class FuncionarioEntity implements Serializable {
 		this.dataAtualizacao = dataAtualizacao;
 	}
 
+	@Column(name = "senha", nullable = false)
+	public String getSenha() {
+		return senha;
+	}
+	
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	public EmpresaEntity getEmpresa() {
 		return empresa;
@@ -155,32 +173,32 @@ public class FuncionarioEntity implements Serializable {
 	}
 
 	@OneToMany(mappedBy = "funcionario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	public List<LancamentoEntity> getLancamentosEntity() {
+	public List<LancamentoEntity> getLancamentos() {
 		return lancamentos;
 	}
 
-	public void setLancamentosEntity(List<LancamentoEntity> lancamentos) {
+	public void setLancamentos(List<LancamentoEntity> lancamentos) {
 		this.lancamentos = lancamentos;
 	}
-
-	@PreUpdate
-	public void preUpdate() {
-		dataAtualizacao = new Date();
-	}
 	
-	@PrePersist
-	public void prePersist() {
-		final Date atual = new Date();
-		dataCriacao = atual;
-		dataAtualizacao = atual;
-	}
+	@PreUpdate
+    	public void preUpdate() {
+        	dataAtualizacao = new Date();
+    	}
+     
+    	@PrePersist
+    	public void prePersist() {
+        	final Date atual = new Date();
+        	dataCriacao = atual;
+        	dataAtualizacao = atual;
+    	}
 
 	@Override
 	public String toString() {
-		return "FuncionarioEntity [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + ", cpf="
-				+ cpf + ", valorHora=" + valorHora + ", qtdHorasTrabalhoDia=" + qtdHorasTrabalhoDia
-				+ ", qtdHorasAlmoco=" + qtdHorasAlmoco + ", perfil=" + perfil + ", dataCriacao=" + dataCriacao
-				+ ", dataAtualizacao=" + dataAtualizacao + ", empresa=" + empresa + "]";
+		return "Funcionario [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + ", cpf=" + cpf
+				+ ", valorHora=" + valorHora + ", qtdHorasTrabalhoDia=" + qtdHorasTrabalhoDia + ", qtdHorasAlmoco="
+				+ qtdHorasAlmoco + ", perfil=" + perfil + ", dataCriacao="
+				+ dataCriacao + ", dataAtualizacao=" + dataAtualizacao + ", empresa=" + empresa + "]";
 	}
-	
+
 }

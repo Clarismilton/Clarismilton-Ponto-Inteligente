@@ -23,6 +23,6 @@ public class ClarismiltonApplicationTests {
 	
 	@Test
 	public void testCarregarContextoDeTeste() {
-		assertEquals(25, qtdPorPagina);
+		assertEquals(100, qtdPorPagina);
 	}
 }

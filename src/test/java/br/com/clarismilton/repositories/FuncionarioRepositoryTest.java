@@ -46,16 +46,20 @@ public class FuncionarioRepositoryTest {
 
 	@Test
 	public void testBuscarFuncionarioPorEmail() {
+	
 		FuncionarioEntity funcionario = this.funcionarioRepository.findByEmail(EMAIL);
 
 		assertEquals(EMAIL, funcionario.getEmail());
 	}
 
+
 	@Test
 	public void testBuscarFuncionarioPorCpf() {
+	
 		FuncionarioEntity funcionario = this.funcionarioRepository.findByCpf(CPF);
 
 		assertEquals(CPF, funcionario.getCpf());
+
 	}
 
 	@Test
@@ -64,18 +68,21 @@ public class FuncionarioRepositoryTest {
 
 		assertNotNull(funcionario);
 	}
-
+	
 	@Test
 	public void testBuscarFuncionarioPorEmailOuCpfParaEmailInvalido() {
+		
 		FuncionarioEntity funcionario = this.funcionarioRepository.findByCpfOrEmail(CPF, "email@invalido.com");
+		
 
 		assertNotNull(funcionario);
 	}
 
 	@Test
 	public void testBuscarFuncionarioPorEmailECpfParaCpfInvalido() {
+	
 		FuncionarioEntity funcionario = this.funcionarioRepository.findByCpfOrEmail("12345678901", EMAIL);
-
+		
 		assertNotNull(funcionario);
 	}
 
@@ -95,7 +102,10 @@ public class FuncionarioRepositoryTest {
 	private EmpresaEntity obterDadosEmpresa() {
 		
 		EmpresaEntity empresa = new EmpresaEntity();
+		
+		empresa.setRazaoSocial("Empresa de exemplo");
 		empresa.setCnpj("51463645000100");
 		return empresa;
 	}
+
 }
