@@ -27,7 +27,7 @@ import br.com.clarismilton.utils.SenhaUtils;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @ActiveProfiles("test")
-public class LancamentoRpositoryTest {
+public class LancamentoRepositoryTest {
 	
 	@Autowired
 	private LancamentoRepository lancamentoRepository;

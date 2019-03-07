@@ -13,7 +13,9 @@ import br.com.clarismilton.entities.LancamentoEntity;
 
 @Transactional(readOnly = true)
 @NamedQueries({
-@NamedQuery(name = "LancamentoRepository.findByFuncionarioId", query = "SELECT lanc FROM Lancamento lanc WHERE lanc.funcionario.id = :funcionarioId") })
+		@NamedQuery(name = "LancamentoRepository.findByFuncionarioId",
+				query = "SELECT lanc FROM Lancamento lanc WHERE lanc.funcionario.id = :funcionarioId") })
+
 public interface LancamentoRepository extends JpaRepository<LancamentoEntity, Long> {
 	
 	List<LancamentoEntity> findByFuncionarioId(@Param("funcionarioId") Long funcionarioId);
