@@ -51,7 +51,6 @@ public class CadastroPFController {
 	 * @return ResponseEntity<Response<CadastroPFDto>>
 	 * @throws NoSuchAlgorithmException
 	 */
-	
 	@PostMapping
 	public ResponseEntity<Response<CadastroPFDto>> cadastrar(@Valid @RequestBody CadastroPFDto cadastroPFDto,
 			BindingResult result) throws NoSuchAlgorithmException {
@@ -81,7 +80,6 @@ public class CadastroPFController {
 	 * @param cadastroPFDto
 	 * @param result
 	 */
-	
 	private void validarDadosExistentes(CadastroPFDto cadastroPFDto, BindingResult result) {
 		Optional<EmpresaEntity> empresa = this.empresaService.buscarPorCnpj(cadastroPFDto.getCnpj());
 		if (!empresa.isPresent()) {
@@ -141,8 +139,6 @@ public class CadastroPFController {
 		cadastroPFDto.getValorHora()
 			.ifPresent(valorHora -> cadastroPFDto.setValorHora(Optional.of(valorHora.toString())));
 
-		
 		return cadastroPFDto;
 	}
-		
 }
