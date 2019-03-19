@@ -2,7 +2,7 @@ package br.com.clarismilton.security.services;
 
 import java.util.Optional;
 
-import br.com.clarismilton.entities.FuncionarioEntity;
+import br.com.clarismilton.security.entities.Usuario;
 
 public interface UsuarioService {
 
@@ -12,6 +12,6 @@ public interface UsuarioService {
 	 * @param email
 	 * @return Optional<Usuario>
 	 */
-	Optional<FuncionarioEntity> buscarPorEmail(String email);
+	Optional<Usuario> buscarPorEmail(String email);
 
 }

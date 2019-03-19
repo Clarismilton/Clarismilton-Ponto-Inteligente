@@ -1,4 +1,5 @@
 package br.com.clarismilton.security;
+
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
