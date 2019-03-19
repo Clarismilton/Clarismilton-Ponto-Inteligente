@@ -52,8 +52,7 @@ public class CadastroPFController {
 	 * @throws NoSuchAlgorithmException
 	 */
 	@PostMapping
-	public ResponseEntity<Response<CadastroPFDto>> cadastrar(@Valid @RequestBody CadastroPFDto cadastroPFDto,
-			BindingResult result) throws NoSuchAlgorithmException {
+	public ResponseEntity<Response<CadastroPFDto>> cadastrar(@Valid @RequestBody CadastroPFDto cadastroPFDto, BindingResult result) throws NoSuchAlgorithmException {
 		log.info("Cadastrando PF: {}", cadastroPFDto.toString());
 		Response<CadastroPFDto> response = new Response<CadastroPFDto>();
 		
@@ -101,8 +100,7 @@ public class CadastroPFController {
 	 * @return Funcionario
 	 * @throws NoSuchAlgorithmException
 	 */
-	private FuncionarioEntity converterDtoParaFuncionario(CadastroPFDto cadastroPFDto, BindingResult result)
-			throws NoSuchAlgorithmException {
+	private FuncionarioEntity converterDtoParaFuncionario(CadastroPFDto cadastroPFDto, BindingResult result) throws NoSuchAlgorithmException {
 		FuncionarioEntity funcionario = new FuncionarioEntity();
 		funcionario.setNome(cadastroPFDto.getNome());
 		funcionario.setEmail(cadastroPFDto.getEmail());
@@ -110,7 +108,7 @@ public class CadastroPFController {
 		funcionario.setPerfil(PerfilEnum.ROLE_USUARIO);
 		funcionario.setSenha(SenhaUtils.gerarBCrypt(cadastroPFDto.getSenha()));
 		cadastroPFDto.getQtdHorasAlmoco().ifPresent(qtdHorasAlmoco -> funcionario.setQtdHorasAlmoco(Float.valueOf(qtdHorasAlmoco)));
-		cadastroPFDto.getQtdHorasTrabalhadasDia().ifPresent(qtdHorasTrabDia -> funcionario.setQtdHorasTrabalhoDia(Float.valueOf(qtdHorasTrabDia)));
+		cadastroPFDto.getQtdHorasTrabalhoDia().ifPresent(qtdHorasTrabDia -> funcionario.setQtdHorasTrabalhoDia(Float.valueOf(qtdHorasTrabDia)));
 		cadastroPFDto.getValorHora().ifPresent(valorHora -> funcionario.setValorHora(new BigDecimal(valorHora)));
 		
 		return funcionario;
@@ -130,7 +128,7 @@ public class CadastroPFController {
 		cadastroPFDto.setCpf(funcionario.getCpf());
 		cadastroPFDto.setCnpj(funcionario.getEmpresa().getCnpj());
 		funcionario.getQtdHorasAlmocoOpt().ifPresent(qtdHorasAlmoco -> cadastroPFDto.setQtdHorasAlmoco(Optional.of(Float.toString(qtdHorasAlmoco))));
-		funcionario.getQtdHorasTrabalhoDiaOpt().ifPresent(qtdHorasTrabDia -> cadastroPFDto.setQtdHorasTrabalhadasDia(Optional.of(Float.toString(qtdHorasTrabDia))));
+		funcionario.getQtdHorasTrabalhoDiaOpt().ifPresent(qtdHorasTrabDia -> cadastroPFDto.setQtdHorasTrabalhoDia(Optional.of(Float.toString(qtdHorasTrabDia))));
 		cadastroPFDto.getValorHora().ifPresent(valorHora -> cadastroPFDto.setValorHora(Optional.of(valorHora.toString())));
 
 		return cadastroPFDto;

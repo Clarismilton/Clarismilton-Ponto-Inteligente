@@ -5,22 +5,18 @@ import java.util.Optional;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.hibernate.validator.constraints.br.CNPJ;
-import org.hibernate.validator.constraints.br.CPF;
 
-public class CadastroPFDto {
+public class FuncionarioDto {
 	
 	private Long id;
 	private String nome;
 	private String email;
-	private String senha;
-	private String cpf;
+	private Optional<String> senha = Optional.empty();
 	private Optional<String> valorHora = Optional.empty();
 	private Optional<String> qtdHorasTrabalhoDia = Optional.empty();
 	private Optional<String> qtdHorasAlmoco = Optional.empty();
-	private String cnpj;
 	
-	public CadastroPFDto() {
+	public FuncionarioDto() {
 	}
 
 	public Long getId() {
@@ -52,25 +48,14 @@ public class CadastroPFDto {
 		this.email = email;
 	}
 
-	@NotEmpty(message = "Senha não pode ser em branco...")
-	public String getSenha() {
+	public Optional<String> getSenha() {
 		return senha;
 	}
 
-	public void setSenha(String senha) {
+	public void setSenha(Optional<String> senha) {
 		this.senha = senha;
 	}
 
-	@NotEmpty(message = "CPF não pode ser em branco...")
-	@CPF(message = "CPF Inválido...")
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-	
 	public Optional<String> getValorHora() {
 		return valorHora;
 	}
@@ -94,22 +79,12 @@ public class CadastroPFDto {
 	public void setQtdHorasAlmoco(Optional<String> qtdHorasAlmoco) {
 		this.qtdHorasAlmoco = qtdHorasAlmoco;
 	}
-	
-	@NotEmpty(message = "CNPJ não pde ser em branco...")
-	@CNPJ(message = "CNPJ Inválido...")
-	public String getCnpj() {
-		return cnpj;
-	}
-
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
-	}
 
 	@Override
 	public String toString() {
-		return "CadastroPFDto [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + ", cpf=" + cpf
-				+ ", valorHora=" + valorHora + ", qtdHorasTrabalhadasDia=" + qtdHorasTrabalhoDia
-				+ ", qtdHorasAlmoco=" + qtdHorasAlmoco + ", cnpj=" + cnpj + "]";
+		return "FuncionarioDto [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + ", valorHora="
+				+ valorHora + ", qtdHorasTrabalhoDia=" + qtdHorasTrabalhoDia + ", qtdHorasAlmoco=" + qtdHorasAlmoco
+				+ "]";
 	}
 	
 }
