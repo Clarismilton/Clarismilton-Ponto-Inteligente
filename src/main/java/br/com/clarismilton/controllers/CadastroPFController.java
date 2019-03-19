@@ -109,12 +109,9 @@ public class CadastroPFController {
 		funcionario.setCpf(cadastroPFDto.getCpf());
 		funcionario.setPerfil(PerfilEnum.ROLE_USUARIO);
 		funcionario.setSenha(SenhaUtils.gerarBCrypt(cadastroPFDto.getSenha()));
-		cadastroPFDto.getQtdHorasAlmoco()
-			.ifPresent(qtdHorasAlmoco -> funcionario.setQtdHorasAlmoco(Float.valueOf(qtdHorasAlmoco)));
-		cadastroPFDto.getQtdHorasTrabalhadasDia()
-			.ifPresent(qtdHorasTrabDia -> funcionario.setQtdHorasTrabalhoDia(Float.valueOf(qtdHorasTrabDia)));
-		cadastroPFDto.getValorHora()
-			.ifPresent(valorHora -> funcionario.setValorHora(new BigDecimal(valorHora)));
+		cadastroPFDto.getQtdHorasAlmoco().ifPresent(qtdHorasAlmoco -> funcionario.setQtdHorasAlmoco(Float.valueOf(qtdHorasAlmoco)));
+		cadastroPFDto.getQtdHorasTrabalhadasDia().ifPresent(qtdHorasTrabDia -> funcionario.setQtdHorasTrabalhoDia(Float.valueOf(qtdHorasTrabDia)));
+		cadastroPFDto.getValorHora().ifPresent(valorHora -> funcionario.setValorHora(new BigDecimal(valorHora)));
 		
 		return funcionario;
 	}
@@ -132,12 +129,9 @@ public class CadastroPFController {
 		cadastroPFDto.setEmail(funcionario.getEmail());
 		cadastroPFDto.setCpf(funcionario.getCpf());
 		cadastroPFDto.setCnpj(funcionario.getEmpresa().getCnpj());
-		funcionario.getQtdHorasAlmocoOpt().ifPresent(qtdHorasAlmoco -> cadastroPFDto
-			.setQtdHorasAlmoco(Optional.of(Float.toString(qtdHorasAlmoco))));
-		funcionario.getQtdHorasTrabalhoDiaOpt().ifPresent(qtdHorasTrabDia -> cadastroPFDto
-			.setQtdHorasTrabalhadasDia(Optional.of(Float.toString(qtdHorasTrabDia))));
-		cadastroPFDto.getValorHora()
-			.ifPresent(valorHora -> cadastroPFDto.setValorHora(Optional.of(valorHora.toString())));
+		funcionario.getQtdHorasAlmocoOpt().ifPresent(qtdHorasAlmoco -> cadastroPFDto.setQtdHorasAlmoco(Optional.of(Float.toString(qtdHorasAlmoco))));
+		funcionario.getQtdHorasTrabalhoDiaOpt().ifPresent(qtdHorasTrabDia -> cadastroPFDto.setQtdHorasTrabalhadasDia(Optional.of(Float.toString(qtdHorasTrabDia))));
+		cadastroPFDto.getValorHora().ifPresent(valorHora -> cadastroPFDto.setValorHora(Optional.of(valorHora.toString())));
 
 		return cadastroPFDto;
 	}
