@@ -6,7 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public class JwtUser implements UserDetails {
-	
+
 	private static final long serialVersionUID = -268046329085485932L;
 
 	private Long id;
@@ -59,4 +59,5 @@ public class JwtUser implements UserDetails {
 	public boolean isEnabled() {
 		return true;
 	}
+
 }

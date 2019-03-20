@@ -11,7 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import br.com.clarismilton.enums.PerfilEnum;
+import br.com.clarismilton.security.enums.PerfilEnum;
 
 @Entity
 @Table(name = "usuario")

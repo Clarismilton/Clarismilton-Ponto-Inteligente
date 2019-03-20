@@ -1,5 +1,6 @@
 package br.com.clarismilton.security.services.impl;
 
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,17 +11,17 @@ import org.springframework.stereotype.Service;
 
 import br.com.clarismilton.entities.FuncionarioEntity;
 import br.com.clarismilton.security.JwtUserFactory;
-import br.com.clarismilton.security.services.UsuarioService;
+import br.com.clarismilton.services.FuncionarioService;
 
 @Service
 public class JwtUserDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired
-	private UsuarioService usuarioService;
+	private FuncionarioService funcionarioService;
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Optional<FuncionarioEntity> funcionario = usuarioService.buscarPorEmail(username);
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		Optional<FuncionarioEntity> funcionario = funcionarioService.buscarPorEmail(email);
 
 		if (funcionario.isPresent()) {
 			return JwtUserFactory.create(funcionario.get());

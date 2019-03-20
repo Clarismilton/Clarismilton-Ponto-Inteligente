@@ -7,10 +7,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import br.com.clarismilton.entities.FuncionarioEntity;
-import br.com.clarismilton.enums.PerfilEnum;
+import br.com.clarismilton.security.enums.PerfilEnum;
 
 public class JwtUserFactory {
-	
+
 	private JwtUserFactory() {
 	}
 
@@ -36,4 +36,5 @@ public class JwtUserFactory {
 		authorities.add(new SimpleGrantedAuthority(perfilEnum.toString()));
 		return authorities;
 	}
+
 }
