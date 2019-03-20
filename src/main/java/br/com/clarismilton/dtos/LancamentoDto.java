@@ -12,7 +12,7 @@ public class LancamentoDto {
 	private String descricao;
 	private String localizacao;
 	private Long funcionarioId;
-	
+
 	public LancamentoDto() {
 	}
 
@@ -24,7 +24,7 @@ public class LancamentoDto {
 		this.id = id;
 	}
 
-	@NotEmpty(message = "A data não ficar em branco.")
+	@NotEmpty(message = "Data não pode ser vazia.")
 	public String getData() {
 		return data;
 	}
@@ -48,7 +48,7 @@ public class LancamentoDto {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
+	
 	public String getLocalizacao() {
 		return localizacao;
 	}
@@ -70,5 +70,5 @@ public class LancamentoDto {
 		return "LancamentoDto [id=" + id + ", data=" + data + ", tipo=" + tipo + ", descricao=" + descricao
 				+ ", localizacao=" + localizacao + ", funcionarioId=" + funcionarioId + "]";
 	}
-
+	
 }

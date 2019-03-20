@@ -7,7 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import br.com.clarismilton.entities.FuncionarioEntity;
-import br.com.clarismilton.security.enums.PerfilEnum;
+import br.com.clarismilton.enums.PerfilEnum;
 
 public class JwtUserFactory {
 

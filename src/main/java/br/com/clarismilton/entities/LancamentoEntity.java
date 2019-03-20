@@ -23,8 +23,8 @@ import br.com.clarismilton.enums.TipoEnum;
 @Entity
 @Table(name = "lancamento")
 public class LancamentoEntity implements Serializable {
-
-	private static final long serialVersionUID = 8642410617096317045L;
+	
+	private static final long serialVersionUID = 6524560251526772839L;
 
 	private Long id;
 	private Date data;
@@ -34,12 +34,12 @@ public class LancamentoEntity implements Serializable {
 	private Date dataAtualizacao;
 	private TipoEnum tipo;
 	private FuncionarioEntity funcionario;
-	
+
 	public LancamentoEntity() {
 	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.AUTO)
 	public Long getId() {
 		return id;
 	}
@@ -66,7 +66,7 @@ public class LancamentoEntity implements Serializable {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
+	
 	@Column(name = "localizacao", nullable = true)
 	public String getLocalizacao() {
 		return localizacao;
@@ -85,7 +85,7 @@ public class LancamentoEntity implements Serializable {
 		this.dataCriacao = dataCriacao;
 	}
 
-	@Column(name = "data_localizacao", nullable = false)
+	@Column(name = "data_atualizacao", nullable = false)
 	public Date getDataAtualizacao() {
 		return dataAtualizacao;
 	}
@@ -114,21 +114,22 @@ public class LancamentoEntity implements Serializable {
 	}
 	
 	@PreUpdate
-	public void preUpdate() {
-		dataAtualizacao = new Date();
-	}
-	
-	@PrePersist
-	public void prePersist() {
-		final Date atual = new Date();
-		dataCriacao = atual;
-		dataAtualizacao = atual;
-	}
+    public void preUpdate() {
+        dataAtualizacao = new Date();
+    }
+     
+    @PrePersist
+    public void prePersist() {
+        final Date atual = new Date();
+        dataCriacao = atual;
+        dataAtualizacao = atual;
+    }
 
 	@Override
 	public String toString() {
-		return "LancamentoEntity [id=" + id + ", data=" + data + ", descricao=" + descricao + ", localizacao="
-				+ localizacao + ", dataCriacao=" + dataCriacao + ", dataAtualizacao=" + dataAtualizacao + ", tipo="
-				+ tipo + ", funcionario=" + funcionario + "]";
+		return "Lancamento [id=" + id + ", data=" + data + ", descricao=" + descricao + ", localizacao=" + localizacao
+				+ ", dataCriacao=" + dataCriacao + ", dataAtualizacao=" + dataAtualizacao + ", tipo=" + tipo
+				+ ", funcionario=" + funcionario + "]";
 	}
+
 }
