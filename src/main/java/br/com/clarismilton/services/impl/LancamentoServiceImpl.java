@@ -5,6 +5,8 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -26,11 +28,13 @@ public class LancamentoServiceImpl implements LancamentoService {
 		return this.lancamentoRepository.findByFuncionarioId(funcionarioId, pageRequest);
 	}
 
+	@Cacheable("lancamentoPorId")
 	public Optional<LancamentoEntity> buscarPorId(Long id) {
 		log.info("Buscando um lançamento pelo ID {}", id);
 		return Optional.ofNullable(this.lancamentoRepository.findOne(id));
 	}
 
+	@CachePut("lancamentoPorId")
 	public LancamentoEntity persistir(LancamentoEntity lancamento) {
 		log.info("Persistindo o lancamento: {}", lancamento);
 		return this.lancamentoRepository.save(lancamento);
@@ -40,7 +44,5 @@ public class LancamentoServiceImpl implements LancamentoService {
 		log.info("Removendo o lançamento ID {}", id);
 		this.lancamentoRepository.delete(id);
 	}
-	
-	
 
 }
