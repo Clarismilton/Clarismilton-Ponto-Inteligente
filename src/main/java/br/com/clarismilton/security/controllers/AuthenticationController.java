@@ -29,7 +29,7 @@ import br.com.clarismilton.security.dto.TokenDto;
 import br.com.clarismilton.security.utils.JwtTokenUtil;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/login")
 @CrossOrigin(origins = "*")
 public class AuthenticationController {
 

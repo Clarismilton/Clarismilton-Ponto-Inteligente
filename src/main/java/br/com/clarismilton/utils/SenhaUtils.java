@@ -38,4 +38,3 @@ public class SenhaUtils {
 		return bCryptEncoder.matches(senha, senhaEncoded);
 	}
 }
-
