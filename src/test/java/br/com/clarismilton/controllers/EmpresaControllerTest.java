@@ -1,4 +1,8 @@
 package br.com.clarismilton.controllers;
+
+//import br.com.clarismilton.entities.EmpresaEntity;
+//import br.com.clarismilton.services.EmpresaService;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -23,31 +27,31 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import br.com.clarismilton.entities.EmpresaEntity;
 import br.com.clarismilton.services.EmpresaService;
 
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
 public class EmpresaControllerTest {
-	
+
 	@Autowired
 	private MockMvc mvc;
-	
+
 	@MockBean
 	private EmpresaService empresaService;
-	
-	private static final String BUSCAR_EMPRESA_CNPJ_URL = "/API/EMPRESAS/CNPJ/";
+
+	private static final String BUSCAR_EMPRESA_CNPJ_URL = "/api/empresas/cnpj/";
 	private static final Long ID = Long.valueOf(1);
 	private static final String CNPJ = "51463645000100";
 	private static final String RAZAO_SOCIAL = "Empresa XYZ";
-	
+
 	@Test
+	@WithMockUser
 	public void testBuscarEmpresaCnpjInvalido() throws Exception {
 		BDDMockito.given(this.empresaService.buscarPorCnpj(Mockito.anyString())).willReturn(Optional.empty());
-		
+
 		mvc.perform(MockMvcRequestBuilders.get(BUSCAR_EMPRESA_CNPJ_URL + CNPJ).accept(MediaType.APPLICATION_JSON))
-			.andExpect(status().isBadRequest())
-			.andExpect(jsonPath("$.errors").value("Empresa não encontrada para o CNPJ " + CNPJ));
+				.andExpect(status().isBadRequest())
+				.andExpect(jsonPath("$.errors").value("Empresa não encontrada para o CNPJ " + CNPJ));
 	}
 
 	@Test
@@ -72,4 +76,5 @@ public class EmpresaControllerTest {
 		empresa.setCnpj(CNPJ);
 		return empresa;
 	}
+
 }
